@@ -8,7 +8,7 @@ On Android, I use the **SecureRandom**, and in fact, you can use your own implem
 
 On IOS, I have not implemented it and you need to create your **IRandom** implementation.
 
-For a computer, being random is hard. But the biggest issue is that it is impossible to know if a series of number is really random.
+For a computer, being random is hard. But the biggest issue is that it is impossible to know if a series of numbers is really random.
 
 If malware modifies your PRNG (and so, can predict the numbers you will generate), you won’t see it until it is too late.
 
@@ -28,7 +28,7 @@ For such attacker, the entropy is LOG(604800000;2) = 29.17 bits.
 
 And enumerating such number on my home computer took less than 2 seconds. We call such enumeration “brute forcing”.
 
-However let’s say, you use the clock time + the process id for generating the seed.  
+However let’s say, you use the clock’s time + the process id for generating the seed.  
 Let’s imagine that there are 1024 different process ids.
 
 So now, the attacker needs to enumerate 604800000 \* 1024 possibilities, which take around 2000 seconds.  
@@ -47,7 +47,7 @@ But since the hash of a public key is 20 bytes = 160 bits, it is smaller than th
 
 An interesting way of generating entropy quickly is by asking human intervention. (Moving the mouse.)
 
-If you don’t completely trust the platform PRNG (which is [not so paranoic](http://android-developers.blogspot.fr/2013/08/some-securerandom-thoughts.html)), you can add entropy to the PRNG output that NBitcoin is using.  
+If you don’t completely trust the platform PRNG (wich is not that unlikely](http://android-developers.blogspot.fr/2013/08/some-securerandom-thoughts.html)), you can add entropy to the PRNG output that NStratis is using.  
 
 ```cs
 RandomUtils.AddEntropy("hello");
@@ -55,7 +55,7 @@ RandomUtils.AddEntropy(new byte[] { 1, 2, 3 });
 var nsaProofKey = new Key();
 ```  
 
-What NBitcoin does when you call **AddEntropy(data)** is:  
+What NStratis does when you call **AddEntropy(data)** is:  
 **additionalEntropy = SHA(SHA(data) ^ additionalEntropy)**
 
 Then when you generate a new number:  
@@ -81,7 +81,7 @@ RandomUtils.AddEntropy(derived);
 
 Even if your attacker knows that your source of entropy is 5 letters, he will need to run Scrypt to check a possibility, which take 5 seconds on my computer.
 
-The bottom line is: There is nothing paranoid into distrusting a PRNG, and you can mitigate an attack by both adding entropy and also using a KDF.  
+The bottom line is: There is nothing paranoid in distrusting a PRNG, and you can mitigate an attack by both adding entropy and also using a KDF.  
 Keep in mind that an attacker can decrease entropy by gathering information about you or your system.  
 If you use the timestamp as entropy source, then he can decrease the entropy by knowing you generated the key last week, and that you only use your computer between 9am and 6pm.
 
@@ -105,7 +105,7 @@ Console.ReadLine();
 
 Such encryption is used in two different cases:  
 
-*   You don not trust your storage provider (they can get hacked)  
+*   You do not trust your storage provider (they can get hacked)  
 *   You are storing the key on the behalf of somebody else (and you do not want to know his key)  
 
 If you own your storage, then encrypting at the database level might be enough.  
@@ -116,7 +116,7 @@ Delegate decryption to the ultimate user when you can.
 
 ## Like the good ol’ days {#like-the-good-ol-days}
 
-First, why generating several keys?  
+First, why generate several keys?  
 The main reason is privacy. Since you can see the balance of all addresses, it is better to use a new address for each transaction.  
 
 However, in practice, you can also generate keys for each contact which makes this a simple way to identify your payer without leaking too much privacy.  
@@ -144,14 +144,14 @@ The second part of the BIP, shows how you can delegate Key and Address creation 
 
 This **PassphraseCode** can be given to your key generator in WIF format.  
 
-> **Tip**: In NBitcoin, all types prefixed by “Bitcoin” are Base58 (WIF) data.  
+> **Tip**: In NStratis, all types prefixed by “Stratis” are Base58 (WIF) data.  
 
 So, as a user that wants to delegate key creation, first you will create the **PassphraseCode**.
 
 ![](../assets/PassphraseCode.png)  
 
 ```cs
-var passphraseCode = new BitcoinPassphraseCode("my secret", Network.Main, null);
+var passphraseCode = new StratisPassphraseCode("my secret", Network.Main, null);
 ```
 
 **You then give this passphraseCode to a third party key generator.**
@@ -168,7 +168,7 @@ This **EncryptedKeyResult** has lots of information:
 
 ![](../assets/EncryptedKeyResult.png)  
 
-First: the **generated bitcoin address**,  
+First: the **generated stratis address**,  
 ```cs
 var generatedAddress = encryptedKeyResult.GeneratedAddress; // 14KZsAVLwafhttaykXxCZt95HqadPXuz73
 ```  
@@ -248,7 +248,7 @@ Key key = extKey.PrivateKey;
 ExtKey newExtKey = new ExtKey(key, chainCode);
 ```  
 
-The **base58** type equivalent of **ExtKey** is called **BitcoinExtKey**.
+The **base58** type equivalent of **ExtKey** is called **StratisExtKey**.
 
 But how can we solve our second problem: delegating address creation to a peer that can potentially be hacked (like a payment server)?
 
@@ -437,9 +437,9 @@ But it has a bonus killer feature.
 
 You have to share only one address with the world (called **StealthAddress**), without leaking any privacy.
 
-Let’s remind us that if you share one **BitcoinAddress** with everybody, then all can see your balance by consulting the blockchain… That’s not the case with a **StealthAddress**.
+Let’s remind ourselves that if you share one **StratisAddress** with everybody, then all can see your balance by consulting the blockchain… That’s not the case with a **StealthAddress**.
 
-This is a real shame it was labeled as **dark** since it solves partially the important problem of privacy leaking caused by the pseudo-anonymity of Bitcoin. A better name would have been: **One Address**.
+Its a real shame that it was labeled as **dark** since it solves partially the important problem of privacy leaking caused by the pseudo-anonymity of Stratis. A better name would have been: **One Address**.
 
 In Dark Wallet terminology, here are the different actors:
 
@@ -464,7 +464,7 @@ BitcoinStealthAddress stealthAddress
         network: Network.Main);
 ```  
 
-The **payer**, will take your **StealthAddress**, generate a temporary key called **Ephem Key** and will generate a **Stealth Pub Key**, from which the Bitcoin address to which the payment will be done is generated.  
+The **payer**, will take your **StealthAddress**, generate a temporary key called **Ephem Key** and will generate a **Stealth Pub Key**, from which the Stratis address to which the payment will be done is generated.  
 
 ![](../assets/EphemKey.png) 
 
@@ -481,7 +481,7 @@ stealthAddress.SendTo(transaction, Money.Coins(1.0m), ephemKey);
 Console.WriteLine(transaction);
 ```  
 
-The creation of the **EphemKey** being an implementation detail, you can omit it, NBitcoin will generate one automatically:  
+The creation of the **EphemKey** being an implementation detail, you can omit it, NStratis will generate one automatically:  
 
 ```cs
 Transaction transaction = new Transaction();
@@ -513,7 +513,7 @@ Console.WriteLine(transaction);
 
 Then the payer add and signs the inputs, then sends the transaction on the network.
 
-The **Scanner** knowing the **StealthAddress** and the **Scan Key** can recover the **Stealth PubKey** and so expected **BitcoinAddress** payment.  
+The **Scanner** knowing the **StealthAddress** and the **Scan Key** can recover the **Stealth PubKey** and so expected **StratisAddress** payment.  
 
 ![](../assets/ScannerRecover.png)  
 
@@ -527,7 +527,7 @@ The code explaining how, as a Scanner, to scan a transaction and how, as a Recei
 
 It should be noted that a **StealthAddress** can have multiple **spend pubkeys**, in which case, the address represent a multi sig.
 
-One limit of Dark Wallet is the use of **OP_RETURN**, so we can’t easily embed arbitrary data in the transaction as we have done for in Bitcoin Transfer. (Current bitcoin rules allows only one OP_RETURN of 40 bytes, soon 80, per transaction)  
+One limit of Dark Wallet is the use of **OP_RETURN**, so we can’t easily embed arbitrary data in the transaction as we have done for in Stratis Transfer. (Current Stratis rules allows only one OP_RETURN of 40 bytes, soon 80, per transaction)  
 
 > ([Stackoverflow](http://bitcoin.stackexchange.com/a/29648/26859)) As I understand it, the "stealth address" is intended to address a very specific problem. If you wish to solicit payments from the public, say by posting a donation address on your website, then everyone can see on the block chain that all those payments went to you, and perhaps try to track how you spend them.  
 > 
