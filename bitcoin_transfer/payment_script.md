@@ -1,5 +1,5 @@
 ## ScriptPubKey {#payment-script}
-You might not know that as far as the Blockchain is concerned, there is no such thing as a Bitcoin Address. Internally, the Bitcoin protocol identifies the recipient of Bitcoin by a **ScriptPubKey**.  
+You might not know that as far as the Blockchain is concerned, there is no such thing as a Stratis Address. Internally, the Stratis protocol identifies the recipient of stratis by a **ScriptPubKey**.  
 
 ![](../assets/ScriptPubKey.png)  
 A **ScriptPubKey** may looks like this:  
