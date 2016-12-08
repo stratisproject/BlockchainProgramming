@@ -1,7 +1,7 @@
-## Bitcoin address {#bitcoin-address}
+## Stratis address {#stratis-address}
 
-You know that your **Bitcoin Address** is what you share to the world to get paid.  
-![](../assets/BitcoinAddress.png)  
+You know that your **Stratis Address** is what you share to the world to get paid.  
+![](../assets/StratisAddress.png)  
 You probably know that your wallet software uses a **private key** to spend the money you received on this address.  
 ![](../assets/PrivateKey.png)  
 
@@ -19,13 +19,13 @@ PubKey publicKey = privateKey.PubKey;
 Console.WriteLine(publicKey); // 0251036303164f6c458e9f7abecb4e55e5ce9ec2b2f1d06d633c9653a07976560c
 ```  
 
-There are two Bitcoin **networks**: 
-* **TestNet** is a Bitcoin network for development purposes. Bitcoins on this network worth nothing.  
-* **MainNet** is the Bitcoin network everybody uses.  
+There are two Stratis **networks**: 
+* **TestNet** is a Stratis network for development purposes. Stratis on this network worth nothing.  
+* **MainNet** is the Stratis network everybody uses.  
 
-> **Note:** You can acquire testnet coins quickly by using **faucets**, just google "get testnet bitcoins".  
+> **Note:** You can acquire testnet coins quickly by using **faucets**, just google "get testnet stratis".  
 
-You can easily get your **bitcoin address** from your public key and the **network** on which this address should be used. 
+You can easily get your **stratis address** from your public key and the **network** on which this address should be used. 
 
 ![](../assets/PubKeyToAddr.png)  
 
@@ -34,7 +34,7 @@ Console.WriteLine(publicKey.GetAddress(Network.Main)); // 1PUYsjwfNmX64wS368ZR5F
 Console.WriteLine(publicKey.GetAddress(Network.TestNet)); // n3zWAo2eBnxLr3ueohXnuAa8mTVBhxmPhq
 ```  
 
-**Precisely a bitcoin address is made up of a version byte (different on both networks) and your public key’s hash bytes concatenated then encoded into Base58Check:**  
+**Precisely a stratis address is made up of a version byte (different on both networks) and your public key’s hash bytes concatenated then encoded into Base58Check:**  
 
 ![](../assets/PubKeyHashToBitcoinAddress.png)  
 
@@ -55,4 +55,4 @@ Console.WriteLine(mainNetAddress); // 1PUYsjwfNmX64wS368ZR5FMouTtUmvtmTY
 Console.WriteLine(testNetAddress); // n3zWAo2eBnxLr3ueohXnuAa8mTVBhxmPhq
 ```  
 
-> **Tip:** Practicing Bitcoin Programming on MainNet makes mistakes more memorable.  
+> **Tip:** Practicing Stratis Programming on MainNet makes mistakes more memorable.  
