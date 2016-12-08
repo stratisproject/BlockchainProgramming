@@ -1,6 +1,6 @@
 ## Spend your coin {#spend-your-coin}
 
-So now that you know what a **bitcoin address**, a **ScriptPubKey**, a **private key**, and a **miner** are you will make your first **transaction** by hand.  
+So now that you know what a **stratis address**, a **ScriptPubKey**, a **private key**, and a **miner** are you will make your first **transaction** by hand.  
 
 As you proceed through this lesson you will add code line by line as it is presented to build a method that will leave feedback for the book in a Twitter style message.  
 
@@ -8,28 +8,28 @@ Let’s start by looking at the **transaction** that contains the **TxOut** that
 
 Create a new **Console Project** (>.net45) and install **QBitNinja.Client** NuGet.  
 
-Have you already generated and noted a private key to yourself? Have you already get the corresponding bitcoin address and sent some funds there? If not, don't worry, I quickly reiterate how you can do it:  
+Have you already generated and noted a private key to yourself? Have you already get the corresponding sratis address and sent some funds there? If not, don't worry, I quickly reiterate how you can do it:  
 
 ```cs
 var network = Network.Main;
 
 var privateKey = new Key();
 var bitcoinPrivateKey = privateKey.GetWif(network);
-var address = bitcoinPrivateKey.GetAddress();
+var address = stratisPrivateKey.GetAddress();
 
 Console.WriteLine(bitcoinPrivateKey);
 Console.WriteLine(address);
 ```  
 
-Note the **bitcoinPrivateKey**, the **address**, send some coins there and note the transaction id (you can find it (probably) in your wallet software or with a blockexplorer, like [blockchain.info](http://blockchain.info/)).  
+Note the **stratisPrivateKey**, the **address**, send some coins there and note the transaction id (you can find it (probably) in your wallet software or with a blockexplorer, like [blockchain.info](http://blockchain.info/)).  
 
 Import your private key:  
 
 ```cs
-var bitcoinPrivateKey = new 
-BitcoinSecret("cSZjE4aJNPpBtU6xvJ6J4iBzDgTmzTjbq8w2kqnYvAprBCyTsG4x");
-var network = bitcoinPrivateKey.Network;
-var address = bitcoinPrivateKey.GetAddress();
+var stratisPrivateKey = new 
+StratisSecret("cSZjE4aJNPpBtU6xvJ6J4iBzDgTmzTjbq8w2kqnYvAprBCyTsG4x");
+var network = stratisPrivateKey.Network;
+var address = stratisPrivateKey.GetAddress();
 
 Console.WriteLine(bitcoinPrivateKey); // cSZjE4aJNPpBtU6xvJ6J4iBzDgTmzTjbq8w2kqnYvAprBCyTsG4x
 Console.WriteLine(address); // mzK6Jy5mer3ABBxfHdcxXEChsn3mkv8qJv
@@ -83,9 +83,9 @@ Constructing **TxOut** and adding to the transaction is the answer for the remai
 
 The donation address of this book is: [1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB](https://blockchain.info/address/1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB)  
 This money goes into my "Coffee and Sushi Wallet" that will keep me fed and compliant while writing the rest of the book.  
-If you succeed to complete this challange you will be able to find your contribution among **Hall of the Makers** on http://n.bitcoin.ninja/ (ordered by generosity).  
+If you succeed to complete this challange you will be able to find your contribution among **Hall of the Makers** on http://n.stratis.ninja/ (ordered by generosity).  
 ```cs
-var hallOfTheMakersAddress = new BitcoinPubKeyAddress("1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB");
+var hallOfTheMakersAddress = new StratisPubKeyAddress("1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB");
 ```  
 If you are working on the testnet, send the testnet coins to any testnet address.
 ```cs
@@ -254,7 +254,7 @@ else
 }
 ```  
 
-#### With your own Bitcoin Core:  
+#### With your own Stratis Core:  
 
 ```cs
 using (var node = Node.ConnectToLocal(network)) //Connect to the node
@@ -273,6 +273,6 @@ The **using** code block will take care of closing the connection to the node. T
 You can also connect directly to the Bitcoin network, however I advise you to connect to your own trusted node (faster and easier)  
   
 ## Need more practice?  
-Youtube: [How to make your first transaction with NBitcoin](https://www.youtube.com/watch?v=X4ZwRWIF49w)  
-CodeProject: [Create a Bitcoin transaction by hand.](http://www.codeproject.com/Articles/1151054/Create-a-Bitcoin-transaction-by-hand)  
+Youtube: [How to make your first transaction with NStratis](https://www.youtube.com/watch?v=X4ZwRWIF49w)  
+CodeProject: [Create a Stratis transaction by hand.](http://www.codeproject.com/Articles/1151054/Create-a-Bitcoin-transaction-by-hand)  
 CodeProject: [DotNetWallet - Build your own Bitcoin wallet in C#](https://www.codeproject.com/script/Articles/ArticleVersion.aspx?waid=214550&aid=1115639)
