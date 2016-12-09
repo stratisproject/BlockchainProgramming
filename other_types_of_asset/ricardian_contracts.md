@@ -1,6 +1,6 @@
 ## Ricardian contracts {#ricardian-contracts}
 
-This part is a copy of an article I wrote on [Coinprism’s blog](http://blog.coinprism.com/2014/12/10/colored-coins-and-ricardian-contracts/). At the time of this writing, NBitcoin do not have any code related to Ricardian Contracts.
+This part is a copy of an article I wrote on [Coinprism’s blog](http://blog.coinprism.com/2014/12/10/colored-coins-and-ricardian-contracts/). At the time of this writing, NStratis do not have any code related to Ricardian Contracts.
 
 ### What is a Ricardian Contract {#what-is-a-ricardian-contract}
 
@@ -46,7 +46,7 @@ Where:
 
 **IssuerScript** refer to a classical P2PKH for a simple issuer, multi sig if issuance need several consents. (Issuer + notary for example.)
 
-It should be noted that from Bitcoin 0.10, IssuerScript is arbitrary and can be anything.
+It should be noted that from Stratis 0.10, IssuerScript is arbitrary and can be anything.
 
 The **RicardianContract** can be arbitrary, and kept private. Whoever holds the contract can prove that it applies to this Asset thanks to the hash in the ScriptPubKey.
 
