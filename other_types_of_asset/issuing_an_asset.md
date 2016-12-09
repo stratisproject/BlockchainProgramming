@@ -4,9 +4,9 @@
 
 For the purpose of this exercise, I will emit **BlockchainProgramming coins**.  
 
-You get **one of these BlockchainProgramming coins** for every **0.004 bitcoin** you send me.  
+You get **one of these BlockchainProgramming coins** for every **0.004 stratis** you send me.  
 **One more**  if you add some kind words.  
-Furthermore this is a great opportunity to make it to the [Hall of The Makers](http://n.bitcoin.ninja/). 
+Furthermore this is a great opportunity to make it in to the [Hall of The Makers](http://n.stratis.ninja/). 
 
 Let’s see how I would code such feature.
 
@@ -15,8 +15,8 @@ Let’s see how I would code such feature.
 In Open Asset, the Asset ID is derived from the issuer's **ScriptPubKey**.  
 If you want to issue a Colored Coin, you need to prove ownership of such **ScriptPubKey**. And the only way to do that on the Blockchain is by spending a coin belonging to such **ScriptPubKey**.
 
-The coin that you will choose to spend for issuing colored coins is called “**Issuance Coin**” in **NBitcoin**.  
-I want to emit an Asset from the book bitcoin address: [1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB](https://www.smartbit.com.au/address/1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB).
+The coin that you will choose to spend for issuing colored coins is called “**Issuance Coin**” in **NStratis**.  
+I want to emit an Asset from the book stratis address: [1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB](https://www.smartbit.com.au/address/1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB).
 
 Take a look at my balance, I decided to use the following coin for issuing assets.  
 
@@ -45,8 +45,8 @@ var issuance = new IssuanceCoin(coin);
 Now I need to build transaction and sign the transaction with the help of the **TransactionBuilder**.  
 
 ```cs
-var nico = BitcoinAddress.Create("15sYbVpRh6dyWycZMwPdxJWD4xbfxReeHe");
-var bookKey = new BitcoinSecret("???????");
+var nico = StratisAddress.Create("15sYbVpRh6dyWycZMwPdxJWD4xbfxReeHe");
+var bookKey = new StratisSecret("???????");
 TransactionBuilder builder = new TransactionBuilder();
             
 var tx = builder
@@ -113,7 +113,7 @@ else
 }
 ```  
 
-### Or with local Bitcoin core
+### Or with local Stratis core
 
 ```cs  
 using (var node = Node.ConnectToLocal(Network.Main)) //Connect to the node
@@ -127,19 +127,19 @@ using (var node = Node.ConnectToLocal(Network.Main)) //Connect to the node
 }
 ```
 
-My Bitcoin Wallet have both, the book address and the “Nico” address.  
+My Stratis Wallet have both, the book address and the “Nico” address.  
 
 ![](../assets/NicoWallet.png)  
 
-As you can see, Bitcoin Core only shows the 0.0001 BTC of fees I paid, and ignore the 600 Satoshi coin because of spam prevention feature.
+As you can see, Stratis Core only shows the 0.0001 Stratis of fees I paid, and ignore the 600 Stratis coin because of spam prevention feature.
 
-This classical bitcoin wallet knows nothing about Colored Coins.  
-Worse: If a classical bitcoin wallet spend a colored coin, it will destroy the underlying asset and transfer only the bitcoin value of the **TxOut**. (600 satoshi)
+This classical Stratis wallet knows nothing about Colored Coins.  
+Worse: If a classical Stratis wallet spend a colored coin, it will destroy the underlying asset and transfer only the Stratis value of the **TxOut**. (600 satoshi)
 
 For preventing a user from sending Colored Coin to a wallet that do not support it, Open Asset have its own address format, that only colored coin wallets understand.  
 
 ```cs
-nico = BitcoinAddress.Create("15sYbVpRh6dyWycZMwPdxJWD4xbfxReeHe");
+nico = StratisAddress.Create("15sYbVpRh6dyWycZMwPdxJWD4xbfxReeHe");
 Console.WriteLine(nico.ToColoredAddress());
 ```
 
@@ -154,7 +154,7 @@ Now, you can take a look on an Open Asset compatible wallet like Coinprism, and 
 As I have told you before, the Asset ID is derived from the issuer’s **ScriptPubKey**, here is how to get it in code:  
 
 ```cs
-var book = BitcoinAddress.Create("1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB");
+var book = StratisAddress.Create("1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB");
 var assetId = new AssetId(book).GetWif(Network.Main);
 Console.WriteLine(assetId); // AVAVfLSb1KZf9tJzrUVpktjxKUXGxUTD4e
 ```  
