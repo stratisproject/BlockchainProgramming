@@ -4,7 +4,7 @@
 
 This part is a purely conceptual exercise of one application of colored coins.
 
-Let’s imagine a company where some decisions are taken by a board of investors after a vote.
+Let’s imagine a company where some decisions are made by a board of investors after a vote.
 
 *   Some investors do not know enough about a topic, so they would like to delegate decisions about some subjects to someone else.
 *   There is potentially a huge number of investors.
@@ -32,7 +32,7 @@ Let’s represent it in purple:
 ![](../assets/PowerCoin.png)  
 
 Let’s say that three persons are interested, Satoshi, Alice and Bob. (Yes, them again)  
-So Boss decides to sell each Power Coin at 0.1 BTC each.
+So Boss decides to sell each Power Coin at 0.1 Stratis each.
 
 Let’s start funding some money to the ```powerCoin``` address, ```satoshi```, ```alice``` and ```bob```.  
 
@@ -80,7 +80,7 @@ var toAlice =
 repo.Transactions.Put(toAlice);
 ```  
 
-In summary, powerCoin issues 2 Power Coins to Alice and send the change to himself. Likewise, Alice send 0.2 BTC to powerCoin and send the change to herself.
+In summary, powerCoin issues 2 Power Coins to Alice and send the change to himself. Likewise, Alice send 0.2 Stratis to powerCoin and send the change to herself.
 
 Where **GetCoins** is  
 
@@ -184,7 +184,7 @@ var vote =
     builder
     .AddCoins(bobVotingCoin)
     .AddKeys(bob)
-    .SendAsset(BitcoinAddress.Create("1HZwkjkeaoZfTSaJxDw6aKkxp45agDiEzN"),
+    .SendAsset(StratisAddress.Create("1HZwkjkeaoZfTSaJxDw6aKkxp45agDiEzN"),
                 new AssetMoney(votingCoin, 1))
     .BuildTransaction(true);
 ```  
@@ -196,7 +196,7 @@ Every participants can also count the result by themselves.
 
 In the previous exercise, we have supposed that Boss announced the modalities of the vote out of the Blockchain, on the company’s website.
 
-This works great, but Bob need to know that the website exists.
+This works great, but Bob needs to know that the website exists.
 
 Another solution is to publish the modalities of the vote directly on the Blockchain within an **Asset Definition File**, so some software can automatically get it and present it to Bob.
 
@@ -223,6 +223,6 @@ In such case, Bob can see that during the issuance of his voting coin, an **Asse
 *   Destination of the votes for each candidates
 *   Human friendly description of it
 
-However, imagine that a hacker wants to cheat the vote. He can always modify the json document (either man in the middle attack, physical access to boss.com, or access to Bob’s machine) so Bob is tricked and send his vote to the wrong candidate.
+However, imagine that a hacker wants to cheat the vote. He can always modify the json document (either a man in the middle attack, physical access to boss.com, or access to Bob’s machine) so Bob is tricked and send his vote to the wrong candidate.
 
 Transforming the **Asset Definition File** into a **Ricardian Contract** by signing it would make any modification immediately detectable by Bob’s software. (See [Proof Of Authenticity](https://github.com/OpenAssets/open-assets-protocol/blob/master/asset-definition-protocol.mediawiki) in the Asset Definition Protocol)
