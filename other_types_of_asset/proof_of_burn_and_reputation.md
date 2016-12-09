@@ -10,21 +10,21 @@ Imagine yourself in the middle age, and you live in a small village with several
 One day, a traveling merchant comes to your village and sells you some goods at an unbelievable low price compared to local one.
 
 However, traveling merchant are well known for scamming people with low quality product, because losing reputation is a small price to pay for them compared to local merchants.  
-Local Merchant invested into a nice store, advertising and their reputation. Unhappy customers can easily destroy them. But the traveling merchant, having no local store and only transient reputation do not have those incentives to not scam people.
+Local Merchant invested into a nice store, advertising and their reputation. Unhappy customers can easily destroy them. But the traveling merchant, having no local store and only transient reputation do not have the incentives to not scam people.
 
-On the internet, where the creation of an identity is so cheap, all merchants are potentially as the travelling one from the middle age.  
-The solution of market providers was to gather the real identity of every participant in the market, so law enforcement become possible.
+On the internet, where the creation of an identity is so cheap, all merchants are potentially as the travelling merchants from the middle age.  
+The solution of market providers was to gather the real identity of every participant in the market, so law enforcement became possible.
 
 If you get scammed on Amazon of Ebay, your bank will most likely refund you, because they have a way to find the thief by contacting Amazon and Ebay.
 
-In a purely P2P market using Bitcoin, we do not have that. If you get scam, you lose money.  
-So how a buyer can trust the traveling merchant?  
+In a purely P2P market using Stratis, we do not have that. If you get scammed, you lose money.  
+So how does a buyer trust the traveling merchant?  
 The response is: by checking how much he invested into his reputation.
 
-So as a good intentioned seller, you want to inspire confidence to your customer. For that you will destroy some of your wealth, and every customer will see. This is the definition of “investing into your reputation”.
+So as a good intentioned seller, you want to inspire confidence into your customers. For that you will spend some of your wealth, and every customer will notice. This is the definition of “investing into your reputation”.
 
-Imagine you burned 50 BTC for your reputation. And a customer want to buy 2 BTC of goods from you. He has good reason to believe that you will not scam him, because you invested more into your reputation that what you can get out of him by scamming.  
-It becomes not economically profitable for you to scam him.
+Imagine you burned 50 Stratis for your reputation. And a customer want to buy 2 Stratis of goods from you. He has good reason to believe that you will not scam him, because you invested more into your reputation then what you can get out of scamming him.  
+It becomes uneconomical for you to scam him.
 
 The technical details will surely vary and change over time, but here is an example of Proof of Burn.  
 
