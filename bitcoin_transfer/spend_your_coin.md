@@ -14,7 +14,7 @@ Have you already generated and noted a private key to yourself? Have you already
 var network = Network.Main;
 
 var privateKey = new Key();
-var bitcoinPrivateKey = privateKey.GetWif(network);
+var stratisPrivateKey = privateKey.GetWif(network);
 var address = stratisPrivateKey.GetAddress();
 
 Console.WriteLine(bitcoinPrivateKey);
@@ -31,7 +31,7 @@ StratisSecret("cSZjE4aJNPpBtU6xvJ6J4iBzDgTmzTjbq8w2kqnYvAprBCyTsG4x");
 var network = stratisPrivateKey.Network;
 var address = stratisPrivateKey.GetAddress();
 
-Console.WriteLine(bitcoinPrivateKey); // cSZjE4aJNPpBtU6xvJ6J4iBzDgTmzTjbq8w2kqnYvAprBCyTsG4x
+Console.WriteLine(stratisPrivateKey); // cSZjE4aJNPpBtU6xvJ6J4iBzDgTmzTjbq8w2kqnYvAprBCyTsG4x
 Console.WriteLine(address); // mzK6Jy5mer3ABBxfHdcxXEChsn3mkv8qJv
 ```  
 
@@ -45,7 +45,7 @@ Console.WriteLine(transactionResponse.TransactionId); // e44587cf08b4f03b0e8b4ae
 Console.WriteLine(transactionResponse.Block.Confirmations);
 ```  
 
-Now we have every information for creating our transactions. The main questions are: **from where, to where and how much?**
+Now we have all the information we need to creat our transactions. The main questions are: **from where, to where and how much?**
 
 ### From where?
 
@@ -55,7 +55,7 @@ var receivedCoins = transactionResponse.ReceivedCoins;
 OutPoint outPointToSpend = null;
 foreach (var coin in receivedCoins)
 {
-    if (coin.TxOut.ScriptPubKey == bitcoinPrivateKey.ScriptPubKey)
+    if (coin.TxOut.ScriptPubKey == stratisPrivateKey.ScriptPubKey)
     {
         outPointToSpend = coin.Outpoint;
     }
@@ -81,7 +81,7 @@ Do you remember the main questions? **From where, to where and how much?**
 Constructing **TxIn** and adding to the transaction was the answer the "from where" question.  
 Constructing **TxOut** and adding to the transaction is the answer for the remaining ones.  
 
-The donation address of this book is: [1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB](https://blockchain.info/address/1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB)  
+The donation address for this book is: [1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB](https://blockchain.info/address/1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB)  
 This money goes into my "Coffee and Sushi Wallet" that will keep me fed and compliant while writing the rest of the book.  
 If you succeed to complete this challange you will be able to find your contribution among **Hall of the Makers** on http://n.stratis.ninja/ (ordered by generosity).  
 ```cs
@@ -89,27 +89,27 @@ var hallOfTheMakersAddress = new StratisPubKeyAddress("1KF8kUVHK42XzgcmJF4Lxz4wc
 ```  
 If you are working on the testnet, send the testnet coins to any testnet address.
 ```cs
-var hallOfTheMakersAddress = BitcoinAddress.Create("mzp4No5cmCXjZUpf112B1XWsvWBfws5bbB");
+var hallOfTheMakersAddress = StratisAddress.Create("mzp4No5cmCXjZUpf112B1XWsvWBfws5bbB");
 ```  
 
 ### How much?
-If you want to send **0.5 BTC** from a **transaction input** with **1 BTC** you actually have to spend all!   
-As the diagram shows below, your **transaction output** specifies  **0.5** BTC to Hall of The Makers and **0.4999** back to you.  
-What happens to the remaining **0.0001 BTC**? This is the miner fee in order to incentivize them to add this transaction into their next block.
+If you want to send **0.5 Stratis** from a **transaction input** with **1 Stratis** you actually have to spend all!   
+As the diagram shows below, your **transaction output** specifies  **0.5** Stratis to Hall of The Makers and **0.4999** back to you.  
+What happens to the remaining **0.0001 Stratis**? This is the miner fee in order to incentivize them to add this transaction into their next block.
 
 ![](../assets/SpendTx.png)  
 
 ```cs
 TxOut hallOfTheMakersTxOut = new TxOut()
 {
-    Value = new Money((decimal)0.5, MoneyUnit.BTC),
+    Value = new Money((decimal)0.5, MoneyUnit.Stratis),
     ScriptPubKey = hallOfTheMakersAddress.ScriptPubKey
 };
 
 TxOut changeBackTxOut = new TxOut()
 {
-    Value = new Money((decimal)0.4999, MoneyUnit.BTC),
-    ScriptPubKey = bitcoinPrivateKey.ScriptPubKey
+    Value = new Money((decimal)0.4999, MoneyUnit.Stratis),
+    ScriptPubKey = stratisPrivateKey.ScriptPubKey
 };
 
 transaction.Outputs.Add(hallOfTheMakersTxOut);
@@ -117,17 +117,17 @@ transaction.Outputs.Add(changeBackTxOut);
 ```  
 
 We can do some finetuning here.  
-You can check the address on a blockexplorer I am working with on this whole chapter example (I am working on the testnet):   http://tbtc.blockr.io/address/info/mzK6Jy5mer3ABBxfHdcxXEChsn3mkv8qJv  
+You can check the address with a blockexplorer I am working with on this whole chapter example (I am working on the testnet):   http://tbtc.blockr.io/address/info/mzK6Jy5mer3ABBxfHdcxXEChsn3mkv8qJv  
 
 ```cs
 // How much you want to TO
-var hallOfTheMakersAmount = new Money(0.5m, MoneyUnit.BTC);
+var hallOfTheMakersAmount = new Money(0.5m, MoneyUnit.Stratis);
 /* At the time of writing the mining fee is 0.05usd
  * Depending on the market price and
  * On the currently advised mining fee,
  * You may consider to increase or decrease it
 */
-var minerFee = new Money(0.0001m, MoneyUnit.BTC);
+var minerFee = new Money(0.0001m, MoneyUnit.Stratis);
 // How much you want to spend FROM
 var txInAmount = receivedCoins[(int) outPointToSpend.N].TxOut.Amount;
 Money changeBackAmount = txInAmount - hallOfTheMakersAmount - minerFee;
@@ -144,7 +144,7 @@ TxOut hallOfTheMakersTxOut = new TxOut()
 TxOut changeBackTxOut = new TxOut()
 {
     Value = changeBackAmount,
-    ScriptPubKey = bitcoinPrivateKey.ScriptPubKey
+    ScriptPubKey = stratisPrivateKey.ScriptPubKey
 };
 ```  
 
@@ -160,7 +160,7 @@ Now add your feedback! This must be less than 40 bytes, or it will crash the app
 This feedback, along with your transaction will appear (after transaction is confirmed) in the [Hall of The Makers](http://n.bitcoin.ninja/). 
 
 ```cs
-var message = "nopara73 loves NBitcoin!";
+var message = "nopara73 loves NStratis!";
 var bytes = Encoding.UTF8.GetBytes(message);
 transaction.Outputs.Add(new TxOut()
 {
@@ -222,18 +222,18 @@ transaction.Inputs[0].ScriptSig = address.ScriptPubKey;
 
 Now that we have created the transaction, we must sign it. In other words, you will have to prove that you own the TxOut that you referenced in the input.  
 
-Signing can be [complicated](https://en.bitcoin.it/w/images/en/7/70/Bitcoin_OpCheckSig_InDetail.png), but we’ll make it simple.
+Signing can be [complicated](https://en.stratis.it/w/images/en/7/70/Bitcoin_OpCheckSig_InDetail.png), but we’ll make it simple.
 
 First let's revisit the **scriptSig** of **in**, how we can get it from code. Remember, we copypasted the address above from a blockexplorer, now let's get it from our QBitNinja transactionResponse:  
 
 ```cs
-transaction.Inputs[0].ScriptSig =  bitcoinPrivateKey.ScriptPubKey;
+transaction.Inputs[0].ScriptSig =  stratisPrivateKey.ScriptPubKey;
 ```  
 
 Then you need to give your private key for signing:  
 
 ```cs
-transaction.Sign(bitcoinPrivateKey, false);
+transaction.Sign(stratisPrivateKey, false);
 ```  
 
 ### Propagate your transactions
@@ -270,9 +270,9 @@ using (var node = Node.ConnectToLocal(network)) //Connect to the node
 
 The **using** code block will take care of closing the connection to the node. That's it!
 
-You can also connect directly to the Bitcoin network, however I advise you to connect to your own trusted node (faster and easier)  
+You can also connect directly to the Stratis network, however I advise you to connect to your own trusted node (faster and easier)  
   
 ## Need more practice?  
 Youtube: [How to make your first transaction with NStratis](https://www.youtube.com/watch?v=X4ZwRWIF49w)  
 CodeProject: [Create a Stratis transaction by hand.](http://www.codeproject.com/Articles/1151054/Create-a-Bitcoin-transaction-by-hand)  
-CodeProject: [DotNetWallet - Build your own Bitcoin wallet in C#](https://www.codeproject.com/script/Articles/ArticleVersion.aspx?waid=214550&aid=1115639)
+CodeProject: [DotNetWallet - Build your own Stratis wallet in C#](https://www.codeproject.com/script/Articles/ArticleVersion.aspx?waid=214550&aid=1115639)
