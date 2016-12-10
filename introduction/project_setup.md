@@ -13,7 +13,7 @@ NStratis is the .NET Stratis library, it is open-source, maintained by Nicolas D
 This library should always be included if you do anything Stratis related in C#.  
 NStratis supports cross-platform applications.  
 
-### ## # How to debug into NBitcoin source code (optional)  
+### ## # How to debug into NStratis source code (optional)  
 
 NStratis lets you debug into its code, to make your life easier. For this feature to work make sure you have source server support enabled in Visual Studio (Tools/Options).   
 ![](../assets/visualstudio_enablesourceserversupport.png)  
