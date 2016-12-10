@@ -34,7 +34,7 @@ var received = new Transaction();
 received.Outputs.Add(new TxOut(Money.Coins(1.0m), scriptPubKey));
 ```  
 
-Bob and Alice agree to pay Nico 1.0 BTC for his services.
+Bob and Alice agree to pay Nico 1.0 Stratis for his services.
 So they get the ```Coin``` they received from the transaction:  
 
 ```cs
@@ -46,7 +46,7 @@ Coin coin = received.Outputs.AsCoins().First();
 Then, with the ```TransactionBuilder```, create an **unsigned transaction**.  
 
 ```cs
-BitcoinAddress nico = new Key().PubKey.GetAddress(Network.Main);
+StratisAddress nico = new Key().PubKey.GetAddress(Network.Main);
 TransactionBuilder builder = new TransactionBuilder();
 Transaction unsigned = 
     builder
@@ -117,10 +117,10 @@ Console.WriteLine(fullySigned);
 ```  
 The transaction is now ready to be sent on the network.
 
-Even if the Bitcoin network supports multi sig as explained here, one question worth asking is: How can you ask to a user who has no clue about bitcoin to pay on satoshi/alice/bob multi sig, since such ```scriptPubKey``` can’t be represented by easy to use Bitcoin Address like we have seen before?
+Even if the Stratis network supports multi sig as explained here, one question is worth asking : How can you ask a user who has no clue about Stratis to pay on satoshi/alice/bob multi sig, since such ```scriptPubKey``` can’t be represented by an easy to use Stratis Address like we have seen before?
 
-Don’t you think it would be cool if we could to represent such ```scriptPubKey``` as easily and compactly as a Bitcoin Address?
+Don’t you think it would be cool if we could represent such ```scriptPubKey``` as easily and compactly as a Stratis Address?
 
-Well, this is possible and it is called a **Bitcoin Script Address** also called Pay to Script Hash. (P2SH)
+Well, this is possible and it is called a **Stratis Script Address** also called Pay to Script Hash. (P2SH)
 
 Nowadays, **native Pay To Multi Sig** as you have seen here, and **native P2PK**, are never used directly as such, they are wrapped into **Pay To Script Hash** payment.
