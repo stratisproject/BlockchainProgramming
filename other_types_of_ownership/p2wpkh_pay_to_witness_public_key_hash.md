@@ -30,7 +30,7 @@ For nodes which did not upgrade, this looks like as two pushes on the stack. Thi
 
 But new nodes will require the signature to get the transaction verified.  
 
-**In NBitcoin, spending a P2WPKH output is not different from spending a normal P2PKH.  
+**In NStratis, spending a P2WPKH output is not different from spending a normal P2PKH.  
 To get the ```ScriptPubKey``` to use from a public key, use ```PubKey.WitHash``` instead of ```PubKey.Hash```.**
 
 ```cs
