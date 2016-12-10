@@ -1,8 +1,8 @@
 ## P2SH (Pay To Script Hash) {#p2sh-pay-to-script-hash}
 
-As seen previously, Multi-Sig works easily in code, however, before p2sh, there was no way to ask a customer to pay to a multi-sig ```scriptPubKey``` as easily as we could hand him a ```BitcoinAddress```.  
+As seen previously, Multi-Sig works easily in code, however, before p2sh, there was no way to ask a customer to pay to a multi-sig ```scriptPubKey``` as easily as we could hand him a ```StratisAddress```.  
 
-**P2SH**, or **Pay To Script Hash**, is an easy way to represent any ```scriptPubKey``` as a simple ```BitcoinScriptAddress```, no matter how complicated it is.
+**P2SH**, or **Pay To Script Hash**, is an easy way to represent any ```scriptPubKey``` as a simple ```StratisScriptAddress```, no matter how complicated it is.
 
 In the previous part we generated this multisig:
 
@@ -44,7 +44,7 @@ OP_HASH160 57b4162e00341af0ffc5d5fab468d738b3234190 OP_EQUAL
 
 Do you see the difference? This p2sh ```scriptPubKey``` represents the hash of my multi-sig script: ```redeemScript.Hash.ScriptPubKey```
 
-Since it is a hash, you can easily convert it as a base58 string ```BitcoinScriptAddress```.
+Since it is a hash, you can easily convert it as a base58 string ```StratisScriptAddress```.
 
 ```cs
 Key bob = new Key();
