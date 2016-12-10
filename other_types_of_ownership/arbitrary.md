@@ -1,8 +1,8 @@
 ## Arbitrary {#arbitrary}
 
-From Bitcoin 0.10, the **RedeemScript** can be arbitrary, which means that with the script language of Bitcoin, you can create your own definition of what “ownership” means.
+From Stratis 0.10, the **RedeemScript** can be arbitrary, which means that with the script language of Stratis, you can create your own definition of what “ownership” means.
 
-For example, I can give money to whoever either know my date of birth (dd/mm/yyyy) serialized in UTF8 either knows the private key of **1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB**.
+For example, I can give money to whoever either knows my date of birth (dd/mm/yyyy) serialized in UTF8 or knows the private key of **1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB**.
 
 The details of the script language are out of scope, you can easily find the documentation on various websites, and it is a stack based language so everyone having done some assembler should be able to read it.  
 
@@ -13,7 +13,7 @@ So first, let’s build the **RedeemScript**,
 > **Note:** For this code to work right click **References** ->** Add Reference...** -> Find **System.Numerics**
 
 ```cs
-BitcoinAddress address = BitcoinAddress.Create("1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB");
+StratisAddress address = StratisAddress.Create("1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB");
 var birth = Encoding.UTF8.GetBytes("18/07/1988");
 var birthHash = Hashes.Hash256(birth);
 Script redeemScript = new Script(
@@ -24,7 +24,7 @@ Script redeemScript = new Script(
     "OP_ENDIF");
 ```
 
-This **RedeemScript** means that there is 2 way of spending such **ScriptCoin**: either you know the data that give **birthHash** (my birthdate), either you own the bitcoin address.
+This **RedeemScript** means that there is 2 way of spending such **ScriptCoin**: either you know the data that give **birthHash** (my birthdate), either you own the stratis address.
 
 Let’s say I sent money to such **redeemScript**:  
 
@@ -71,7 +71,7 @@ Console.WriteLine(result); // True
 The second way of spending the coin is by proving ownership of **1KF8kUVHK42XzgcmJF4Lxz4wcL5WDL97PB**.  
 ```
 ////Option 2 : Spender knows my private key
-BitcoinSecret secret = new BitcoinSecret("...");
+StratisSecret secret = new StratisSecret("...");
 var sig = spending.SignInput(secret, scriptCoin);
 var p2pkhProof = PayToPubkeyHashTemplate
     .Instance
