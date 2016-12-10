@@ -7,7 +7,7 @@ The .NET framework is popular in corporate environments. We also believe this is
 *   The BizSpark program allows any startup to get all Microsoft tools, including $150/month of Azure service, for free.
 *   Visual Studio Community 2015 is a professional grade IDE that you can use freely as hobbyist.
 *   C# is closely related to Java and C++. As such, it can be easily read by a big base of developers.
-*   Nicolas Dorier, one of the authors of this book, created the most popular Bitcoin Framework for .NET, called [NBitcoin](https://github.com/MetacoSA/NBitcoin).
+*   Nicolas Dorier, one of the authors of this book, created the most popular Bitcoin Framework for .NET, called [NStratis](https://github.com/MetacoSA/NStratis).
 *   Every person I met who learned about C# will tell you it is the best language out there, even if it is not the one they are using at the moment.
 
 The authors of this book have over 15 years combined experience with C#. It is our go-to language for any project for fun or profit.  
