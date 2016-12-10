@@ -65,7 +65,7 @@ Coin aliceCoin = coins[1];
 Coin bobAliceCoin = coins[2];
 ```  
 
-Now let’s say ```bob``` wants to sends 0.2 BTC, ```alice``` 0.3 BTC, and they agree to use ```bobAlice``` to send 0.5 BTC.  
+Now let’s say ```bob``` wants to sends 0.2 Stratis, ```alice``` 0.3 Stratis, and they agree to use ```bobAlice``` to send 0.5 Stratis.  
 
 ```cs
 var builder = new TransactionBuilder();
@@ -128,8 +128,8 @@ Let’s create darkAliceBob stealth address as in previous chapter:
 
 ```cs
 Key scanKey = new Key();
-BitcoinStealthAddress darkAliceBob =
-    new BitcoinStealthAddress
+StratisStealthAddress darkAliceBob =
+    new StratisStealthAddress
         (
             scanKey: scanKey.PubKey,
             pubKeys: new[] { alice.PubKey, bob.PubKey },
