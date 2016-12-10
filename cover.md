@@ -3,7 +3,7 @@
 
 # Programming The Blockchain in C**\#**
 _Authored by Nicolas Dorier  
-Creator of NBitcoin, The .NET Bitcoin Framework_
+Creator of NStratis, The .NET Stratis Framework_
 
 _Co-authored with Bill Strait  
 Founder of Billd Labs_
